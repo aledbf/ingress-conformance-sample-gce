@@ -34,7 +34,6 @@ jobs:
         run: |
           gcloud config set run/region $RUN_REGION
 
-
       - name: Prepare environment
         run: |
           if [ -z "${{ secrets.KUBE_CONFIG }}" ]; then
@@ -43,6 +42,7 @@ jobs:
           fi
 
           echo "${{ secrets.KUBE_CONFIG }}" > "${KUBECONFIG}"
+          kubectl create clusterrolebinding $(whoami) --clusterrole=cluster-admin --user=$(gcloud config get-value core/account) || true
 
       - name: Checkout
         uses: actions/checkout@v1
@@ -55,6 +55,7 @@ jobs:
 
       - name: Run conformance tests
         run: |
+          kubectl delete namespace sonobuoy || true
           .github/conformance.sh
 
       - name: Generate reports
