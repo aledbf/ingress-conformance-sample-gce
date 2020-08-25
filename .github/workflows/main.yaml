@@ -16,46 +16,52 @@ jobs:
       INGRESS_CLASS: ${{ secrets.INGRESS_CLASS }}
       INGRESS_CONTROLLER: ${{ secrets.INGRESS_CONTROLLER }}
       CONTROLLER_VERSION: ${{ secrets.CONTROLLER_VERSION }}
+      PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
       RUN_REGION: us-central1
       KUBERNETES_PROVIDER: gce
       KUBE_GCE_ZONE: us-central1-c
-      KUBE_VERSION: v1.19.0-rc.4
       NUM_NODES: 1
       PREEMPTIBLE_MASTER: true
-      PREEMPTIBLE_INSTANCES: true
+      PREEMPTIBLE_NODE: true
+      KUBERNETES_RELEASE: v1.19.0-rc.4
+
+      WAIT_FOR_STATUS_TIMEOUT: ${{ secrets.WAIT_FOR_STATUS_TIMEOUT }}
+      TEST_TIMEOUT: ${{ secrets.TEST_TIMEOUT }}
 
     steps:
+
+      - name: Checkout
+        uses: actions/checkout@v1
 
       # Setup gcloud CLI
       - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
         with:
-          version: '275.0.0'
           project_id: ${{ secrets.GCP_PROJECT_ID }}
           service_account_key: ${{ secrets.GCP_SA_KEY }}
-          export_default_credentials: true
 
       # Configure gcloud CLI
       - name: gcloud Set up
         run: |
-          gcloud config set run/region $RUN_REGION
           gcloud components install beta
           gcloud components install alpha
 
-      - name: Prepare environment
+      - name: Prepare environment (1)
+        run: |
+          mkdir -p scripts
+
+      - name: Prepare Kubernetes environment (2)
+        working-directory: scripts
         run: |
           curl -sS https://get.k8s.io | bash
           cd kubernetes
           cluster/kube-down.sh || true
           cluster/kube-up.sh
 
-          sleep 120
+          sleep 60
 
           kubectl create clusterrolebinding $(whoami) --clusterrole=cluster-admin --user=$(gcloud config get-value core/account) || true
 
-      - name: Checkout
-        uses: actions/checkout@v1
-
-      - name: Prepare environment
+      - name: Prepare test environment (3)
         run: |
           sudo bash -c 'curl -sSL https://github.com/vmware-tanzu/sonobuoy/releases/download/v0.18.4/sonobuoy_0.18.4_linux_amd64.tar.gz | tar xvz -C /usr/local/bin/ sonobuoy'
           # optional step to cleanup the generated HTML
@@ -80,3 +86,10 @@ jobs:
         with:
           name: cucumber-output
           path: /tmp/reports/*
+
+      - name: Cleanup
+        if: ${{ always() }}
+        working-directory: scripts
+        run: |
+          cd kubernetes
+          cluster/kube-down.sh || true
