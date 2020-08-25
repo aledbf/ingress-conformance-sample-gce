@@ -14,10 +14,15 @@ jobs:
 
     env:
       INGRESS_CLASS: ${{ secrets.INGRESS_CLASS }}
-      KUBECONFIG: /tmp/kubeconfig
       INGRESS_CONTROLLER: ${{ secrets.INGRESS_CONTROLLER }}
       CONTROLLER_VERSION: ${{ secrets.CONTROLLER_VERSION }}
       RUN_REGION: us-central1
+      KUBERNETES_PROVIDER: gce
+      KUBE_GCE_ZONE: us-central1-c
+      KUBE_VERSION: v1.19.0-rc.4
+      NUM_NODES: 1
+      PREEMPTIBLE_MASTER: true
+      PREEMPTIBLE_INSTANCES: true
 
     steps:
 
@@ -33,15 +38,18 @@ jobs:
       - name: gcloud Set up
         run: |
           gcloud config set run/region $RUN_REGION
+          gcloud components install beta
+          gcloud components install alpha
 
       - name: Prepare environment
         run: |
-          if [ -z "${{ secrets.KUBE_CONFIG }}" ]; then
-            echo "Secret variable KUBE_CONFIG must be set"
-            exit 1
-          fi
+          curl -sS https://get.k8s.io | bash
+          cd kubernetes
+          cluster/kube-down.sh || true
+          cluster/kube-up.sh
 
-          echo "${{ secrets.KUBE_CONFIG }}" > "${KUBECONFIG}"
+          sleep 120
+
           kubectl create clusterrolebinding $(whoami) --clusterrole=cluster-admin --user=$(gcloud config get-value core/account) || true
 
       - name: Checkout
