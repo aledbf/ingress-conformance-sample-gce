@@ -17,8 +17,24 @@ jobs:
       KUBECONFIG: /tmp/kubeconfig
       INGRESS_CONTROLLER: ${{ secrets.INGRESS_CONTROLLER }}
       CONTROLLER_VERSION: ${{ secrets.CONTROLLER_VERSION }}
+      RUN_REGION: us-central1
 
     steps:
+
+      # Setup gcloud CLI
+      - uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+        with:
+          version: '275.0.0'
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+      # Configure gcloud CLI
+      - name: gcloud Set up
+        run: |
+          gcloud config set run/region $RUN_REGION
+
+
       - name: Prepare environment
         run: |
           if [ -z "${{ secrets.KUBE_CONFIG }}" ]; then
