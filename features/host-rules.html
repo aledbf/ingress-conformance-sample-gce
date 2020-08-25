@@ -381,7 +381,7 @@ kbd {
         
         <div class="text">
           <span class="keyword highlight">Given </span>
-                    <span class="duration">20s</span>
+                    <span class="duration">10s</span>
                               
           an Ingress resource          
           <a class="btn text-primary" data-toggle="collapse" href="#host-rules-an-ingress-with-a-host-rule-should-send-tls-traffic-to-the-matching-backend-service-an-Ingress-resource">+Show Parameter</a>
@@ -416,19 +416,20 @@ kbd {
       <div class="scenario-step-container">
         
         
-        <div class="label" data-toggle="tooltip" data-placement="top" title="Step failed"> <i class="material-icons text-danger">error</i>
+        <div class="label" title="Success">
+          <i class="material-icons passed-color" data-toggle="tooltip" data-placement="top" title="Step passed">check_circle</i>
         </div>
         
         
         <div class="text">
           <span class="keyword highlight">Then </span>
-                    <span class="duration">5m0s</span>
+                    <span class="duration">2m25s</span>
                               
           The Ingress status shows the IP address or FQDN where it is exposed          
           
         </div>
         
-        <a class="btn text-danger" href="#error03-error" data-toggle="collapse">+Show Error</a>
+        
         
         
         
@@ -436,10 +437,6 @@ kbd {
         
       </div>
       
-      
-      <div id="error03-error" class="scenario-step-collapse collapse bg-danger p-2 ml-3 mr-3">
-        <pre class="info text-white p-0 m-0">waiting for ingress status update: timed out waiting for the condition</pre>
-      </div>
       
       
       
@@ -454,8 +451,7 @@ kbd {
       <div class="scenario-step-container">
         
         
-        <div class="label" data-toggle="tooltip" data-placement="top" title="Step is skipped">
-          <i class="material-icons skipped-color">double_arrow</i>
+        <div class="label" data-toggle="tooltip" data-placement="top" title="Step failed"> <i class="material-icons text-danger">error</i>
         </div>
         
         
@@ -467,7 +463,7 @@ kbd {
           
         </div>
         
-        
+        <a class="btn text-danger" href="#error04-error" data-toggle="collapse">+Show Error</a>
         
         
         
@@ -475,6 +471,10 @@ kbd {
         
       </div>
       
+      
+      <div id="error04-error" class="scenario-step-collapse collapse bg-danger p-2 ml-3 mr-3">
+        <pre class="info text-white p-0 m-0">Get "https://35.186.217.134/": EOF</pre>
+      </div>
       
       
       
@@ -628,18 +628,18 @@ kbd {
       </div>
     </div>
     <div class="card-footer p-1 border-danger pl-3 pr-3">
-      Duration: 5m21s <span class="new badge"><i class="material-icons" style="font-size: 15px;">query_builder</i></span>
+      Duration: 2m35s <span class="new badge"><i class="material-icons" style="font-size: 15px;">query_builder</i></span>
       <div class="d-inline-block float-right">
         
         
         
-        <span class="step skipped-background" data-toggle="tooltip" title="Scenario is skipped">5</span>
+        <span class="step skipped-background" data-toggle="tooltip" title="Scenario is skipped">4</span>
         
         
         <span class="step failed-background" data-toggle="tooltip" title="Scenario failed">1</span>
         
         
-        <span class="step passed-background" data-toggle="tooltip" title="Scenario passed">3</span>
+        <span class="step passed-background" data-toggle="tooltip" title="Scenario passed">4</span>
         
         
       </div>
@@ -782,7 +782,7 @@ kbd {
         
         <div class="text">
           <span class="keyword highlight">Then </span>
-                    <span class="duration">2m45s</span>
+                    <span class="duration">2m30s</span>
                               
           The Ingress status shows the IP address or FQDN where it is exposed          
           
@@ -952,7 +952,7 @@ kbd {
       </div>
     </div>
     <div class="card-footer p-1 border-danger pl-3 pr-3">
-      Duration: 2m55s <span class="new badge"><i class="material-icons" style="font-size: 15px;">query_builder</i></span>
+      Duration: 2m40s <span class="new badge"><i class="material-icons" style="font-size: 15px;">query_builder</i></span>
       <div class="d-inline-block float-right">
         
         
@@ -1353,7 +1353,7 @@ kbd {
         
         <div class="text">
           <span class="keyword highlight">Then </span>
-                    <span class="duration">2m55s</span>
+                    <span class="duration">2m30s</span>
                               
           The Ingress status shows the IP address or FQDN where it is exposed          
           
@@ -1438,7 +1438,7 @@ kbd {
       
       
       <div id="error35-error" class="scenario-step-collapse collapse bg-danger p-2 ml-3 mr-3">
-        <pre class="info text-white p-0 m-0">expected status code 200 but 502 was returned</pre>
+        <pre class="info text-white p-0 m-0">expected status code 200 but 404 was returned</pre>
       </div>
       
       
@@ -1523,7 +1523,7 @@ kbd {
       </div>
     </div>
     <div class="card-footer p-1 border-danger pl-3 pr-3">
-      Duration: 3m5s <span class="new badge"><i class="material-icons" style="font-size: 15px;">query_builder</i></span>
+      Duration: 2m40s <span class="new badge"><i class="material-icons" style="font-size: 15px;">query_builder</i></span>
       <div class="d-inline-block float-right">
         
         
@@ -1677,7 +1677,7 @@ kbd {
         
         <div class="text">
           <span class="keyword highlight">Then </span>
-                    <span class="duration">2m45s</span>
+                    <span class="duration">2m30s</span>
                               
           The Ingress status shows the IP address or FQDN where it is exposed          
           
@@ -1774,7 +1774,7 @@ kbd {
       </div>
     </div>
     <div class="card-footer p-1 border-success pl-3 pr-3">
-      Duration: 2m55s <span class="new badge"><i class="material-icons" style="font-size: 15px;">query_builder</i></span>
+      Duration: 2m40s <span class="new badge"><i class="material-icons" style="font-size: 15px;">query_builder</i></span>
       <div class="d-inline-block float-right">
         
         
