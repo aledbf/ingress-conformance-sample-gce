@@ -271,13 +271,13 @@ kbd {
           <td>
             <p data-toggle="tooltip" data-placement="left" title="Scenario passed">Passed</p>
           </td>
-          <td class="percentage">50.00%</td>
+          <td class="percentage">33.33%</td>
         </tr>
         <tr>
           <td>
             <p data-toggle="tooltip" data-placement="left" title="Scenario failed">Failed</p>
           </td>
-          <td class="percentage">50.00%</td>
+          <td class="percentage">66.67%</td>
       </tbody>
     </table>
   </div>
@@ -423,7 +423,7 @@ kbd {
         
         <div class="text">
           <span class="keyword highlight">Then </span>
-                    <span class="duration">2m25s</span>
+                    <span class="duration">1m55s</span>
                               
           The Ingress status shows the IP address or FQDN where it is exposed          
           
@@ -628,7 +628,7 @@ kbd {
       </div>
     </div>
     <div class="card-footer p-1 border-danger pl-3 pr-3">
-      Duration: 2m35s <span class="new badge"><i class="material-icons" style="font-size: 15px;">query_builder</i></span>
+      Duration: 2m5s <span class="new badge"><i class="material-icons" style="font-size: 15px;">query_builder</i></span>
       <div class="d-inline-block float-right">
         
         
@@ -782,7 +782,7 @@ kbd {
         
         <div class="text">
           <span class="keyword highlight">Then </span>
-                    <span class="duration">2m30s</span>
+                    <span class="duration">2m25s</span>
                               
           The Ingress status shows the IP address or FQDN where it is exposed          
           
@@ -952,7 +952,7 @@ kbd {
       </div>
     </div>
     <div class="card-footer p-1 border-danger pl-3 pr-3">
-      Duration: 2m40s <span class="new badge"><i class="material-icons" style="font-size: 15px;">query_builder</i></span>
+      Duration: 2m35s <span class="new badge"><i class="material-icons" style="font-size: 15px;">query_builder</i></span>
       <div class="d-inline-block float-right">
         
         
@@ -1546,7 +1546,7 @@ kbd {
   <div class="card m-1">
     <div class="card-body">
       <div class="card-title m-0">
-        <a data-toggle="collapse" href="#" aria-expanded="true" aria-controls="scenario4" class="h5 text-success">
+        <a data-toggle="collapse" href="#" aria-expanded="true" aria-controls="scenario4" class="h5 text-danger">
           Scenario: <span class="text-muted">An Ingress with a wildcard host rule should not route traffic matching on more than a single dns label</span>
         </a>
         <p>    (No match, wildcard only covers a single DNS label)</p>
@@ -1677,7 +1677,7 @@ kbd {
         
         <div class="text">
           <span class="keyword highlight">Then </span>
-                    <span class="duration">2m30s</span>
+                    <span class="duration">2m40s</span>
                               
           The Ingress status shows the IP address or FQDN where it is exposed          
           
@@ -1740,8 +1740,7 @@ kbd {
       <div class="scenario-step-container">
         
         
-        <div class="label" title="Success">
-          <i class="material-icons passed-color" data-toggle="tooltip" data-placement="top" title="Step passed">check_circle</i>
+        <div class="label" data-toggle="tooltip" data-placement="top" title="Step failed"> <i class="material-icons text-danger">error</i>
         </div>
         
         
@@ -1753,7 +1752,7 @@ kbd {
           
         </div>
         
-        
+        <a class="btn text-danger" href="#error45-error" data-toggle="collapse">+Show Error</a>
         
         
         
@@ -1761,6 +1760,10 @@ kbd {
         
       </div>
       
+      
+      <div id="error45-error" class="scenario-step-collapse collapse bg-danger p-2 ml-3 mr-3">
+        <pre class="info text-white p-0 m-0">expected status code 404 but 502 was returned</pre>
+      </div>
       
       
       
@@ -1773,15 +1776,17 @@ kbd {
       
       </div>
     </div>
-    <div class="card-footer p-1 border-success pl-3 pr-3">
-      Duration: 2m40s <span class="new badge"><i class="material-icons" style="font-size: 15px;">query_builder</i></span>
+    <div class="card-footer p-1 border-danger pl-3 pr-3">
+      Duration: 2m50s <span class="new badge"><i class="material-icons" style="font-size: 15px;">query_builder</i></span>
       <div class="d-inline-block float-right">
         
         
         
         
+        <span class="step failed-background" data-toggle="tooltip" title="Scenario failed">1</span>
         
-        <span class="step passed-background" data-toggle="tooltip" title="Scenario passed">6</span>
+        
+        <span class="step passed-background" data-toggle="tooltip" title="Scenario passed">5</span>
         
         
       </div>
@@ -2077,8 +2082,8 @@ kbd {
           datasets: [
             {
               data: [
-                3,
-                3,
+                2,
+                4,
                 0,
                 0,
                 0,
