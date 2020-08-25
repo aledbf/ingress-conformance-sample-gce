@@ -14,13 +14,13 @@ Sample repository to show how to run the conformance suite and generate reports 
 ### How I run the conformance test using a particular ingress controller?
 
 - Fork the repository -> **Click Settings** -> **Click Secrets**
-- Change secret `KUBECONFIG` value
+- Change secret `KUBE_CONFIG` value
 
 ![Update secrets](./docs/secrets.png)
 
 where:
 
 - **INGRESS_CLASS:** name of the class that are valid for the ingress controller
-- **KUBECONFIG:** holds a kubeconfig file content
+- **KUBE_CONFIG:** holds a kubeconfig file content
 - **INGRESS_CONTROLLER:** name of the ingress controller (default `N/A`)
 - **CONTROLLER_VERSION:** version of the ingress controller (default `N/A`)

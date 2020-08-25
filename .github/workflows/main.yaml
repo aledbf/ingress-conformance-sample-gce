@@ -14,17 +14,19 @@ jobs:
 
     env:
       INGRESS_CLASS: ${{ secrets.INGRESS_CLASS }}
-      KUBECONFIG: ${{ secrets.KUBECONFIG }}
+      KUBECONFIG: /tmp/kubeconfig
       INGRESS_CONTROLLER: ${{ secrets.INGRESS_CONTROLLER }}
       CONTROLLER_VERSION: ${{ secrets.CONTROLLER_VERSION }}
 
     steps:
       - name: Prepare environment
         run: |
-          if [ -z "${KUBECONFIG}" ]; then
-            echo "Secret variable KUBECONFIG must be set"
+          if [ -z "${KUBE_CONFIG}" ]; then
+            echo "Secret variable KUBE_CONFIG must be set"
             exit 1
           fi
+
+          echo "${KUBE_CONFIG}" > "${KUBECONFIG}"
 
       - name: Checkout
         uses: actions/checkout@v1
