@@ -21,12 +21,12 @@ jobs:
     steps:
       - name: Prepare environment
         run: |
-          if [ -z "${KUBE_CONFIG}" ]; then
+          if [ -z "${{ secrets.KUBE_CONFIG }}" ]; then
             echo "Secret variable KUBE_CONFIG must be set"
             exit 1
           fi
 
-          echo "${KUBE_CONFIG}" > "${KUBECONFIG}"
+          echo "${{ secrets.KUBE_CONFIG }}" > "${KUBECONFIG}"
 
       - name: Checkout
         uses: actions/checkout@v1
