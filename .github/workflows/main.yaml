@@ -1,0 +1,55 @@
+name: Conformance
+
+on:
+  schedule:
+    - cron: '0 */12 * * *'
+  push:
+    branches:
+      - master
+
+jobs:
+
+  conformance:
+    runs-on: ubuntu-latest
+
+    env:
+      INGRESS_CLASS: ${{ secrets.INGRESS_CLASS }}
+      KUBECONFIG: ${{ secrets.KUBECONFIG }}
+      INGRESS_CONTROLLER: ${{ secrets.INGRESS_CONTROLLER }}
+      CONTROLLER_VERSION: ${{ secrets.CONTROLLER_VERSION }}
+
+    steps:
+      - name: Prepare environment
+        run: |
+          if [ -z "${KUBECONFIG}" ]; then
+            echo "Secret variable KUBECONFIG must be set"
+            exit 1
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v1
+
+      - name: Prepare environment
+        run: |
+          sudo bash -c 'curl -sSL https://github.com/vmware-tanzu/sonobuoy/releases/download/v0.18.4/sonobuoy_0.18.4_linux_amd64.tar.gz | tar xvz -C /usr/local/bin/ sonobuoy'
+          # optional step to cleanup the generated HTML
+          sudo bash -c 'apt update && apt install -y tidy'
+
+      - name: Run conformance tests
+        run: |
+          .github/conformance.sh
+
+      - name: Generate reports
+        run: |
+          # clone the gh-pages repository branch
+          export TEMP_WORKTREE=$(mktemp -d)
+          remote_repo="https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
+          git clone --branch=gh-pages --depth=1 "${remote_repo}" "${TEMP_WORKTREE}"
+
+          .github/generate-reports.sh
+
+      - name: Upload cucumber json files
+        uses: actions/upload-artifact@v2
+        with:
+          name: cucumber-output
+          path: /tmp/reports/*
